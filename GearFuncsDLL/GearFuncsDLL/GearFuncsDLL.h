@@ -12,13 +12,10 @@ namespace GearFuncs
     class MyGearFuncs
     {
     public: 
-        // Returns a + b
         static GEARFUNCSDLL_API double GearsToMoD(double dWheelInInches, double dFrontChainRing, double dRearChainRing); 
 
-        // Returns a - b
-        static GEARFUNCSDLL_API double MoDToSpeed(double a, double b); 
+        static GEARFUNCSDLL_API double MoDToSpeed(double dMoD, double dCadence); 
 
-        // Returns a * b
-        static GEARFUNCSDLL_API double SpeedToCadence(double a, double b);
+        static GEARFUNCSDLL_API double SpeedToCadence(double dCadence, double dGearInches);
     };
 }

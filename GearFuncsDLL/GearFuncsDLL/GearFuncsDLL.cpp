@@ -18,14 +18,14 @@ namespace GearFuncs
         return dWheelInInches*(dFrontChainRing/dRearChainRing);
     }
 
-	double MyGearFuncs::MoDToSpeed(double a, double b)
+	double MyGearFuncs::MoDToSpeed(double dMoD, double dCadence)
     {
-        return a - b;
+        return (((dMoD*3.14159265)*dCadence)*60)/63360;
     }
 
-	double MyGearFuncs::SpeedToCadence(double a, double b)
+	double MyGearFuncs::SpeedToCadence(double dCadence, double dGearInches)
     {
-        return a * b;
+        return ((dCadence*63660)/60)/(dGearInches*3.14159265);
     }
 
     //double MyGearFuncs::Divide(double a, double b)
