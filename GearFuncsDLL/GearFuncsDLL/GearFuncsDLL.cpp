@@ -7,6 +7,7 @@
 
 using namespace std;
 
+#define M_PI       3.14159265358979323846
 namespace GearFuncs
 {
 	double MyGearFuncs::GearsToMoD(double dWheelInInches, double dFrontChainRing, double dRearChainRing)
@@ -20,12 +21,12 @@ namespace GearFuncs
 
 	double MyGearFuncs::MoDToSpeed(double dMoD, double dCadence)
     {
-        return (((dMoD*3.14159265)*dCadence)*60)/63360;
+        return (((dMoD*M_PI)*dCadence)*60)/63360;
     }
 
 	double MyGearFuncs::SpeedToCadence(double dCadence, double dGearInches)
     {
-        return ((dCadence*63660)/60)/(dGearInches*3.14159265);
+        return ((dCadence*63660)/60)/(dGearInches*M_PI);
     }
 
     //double MyGearFuncs::Divide(double a, double b)
