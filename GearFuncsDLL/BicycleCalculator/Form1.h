@@ -1,5 +1,6 @@
 #include <string>
 #include <sstream>
+#include <msclr/marshal_cppstd.h>
 #pragma once
 
 namespace BicycleCalculator {
@@ -25,6 +26,7 @@ namespace BicycleCalculator {
 			//TODO: Add the constructor code here
 			//
 			m_iWheelWidth = 0;
+			m_iMAXFRONTCHAINRINGS = 3;
 		}
 
 		void DoCalculations(){
@@ -64,6 +66,8 @@ namespace BicycleCalculator {
 		/// </summary>
 		System::ComponentModel::Container ^components;
 		int m_iWheelWidth;
+		int m_iMAXFRONTCHAINRINGS;
+		std::string strFrontRing[3];
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -146,6 +150,7 @@ namespace BicycleCalculator {
 			this->txtFront->Name = L"txtFront";
 			this->txtFront->Size = System::Drawing::Size(75, 20);
 			this->txtFront->TabIndex = 10;
+			this->txtFront->Text = L"50";
 			// 
 			// txtRear
 			// 
@@ -201,7 +206,8 @@ namespace BicycleCalculator {
 #pragma endregion
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 }
-private: System::Void comboSize_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void comboSize_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
+		 {
 			 DoCalculations();
 			 switch(comboWidth->SelectedIndex)
 			 {
@@ -227,15 +233,17 @@ private: System::Void comboSize_SelectedIndexChanged(System::Object^  sender, Sy
 			 
 			 if(this->txtFront->Text->Length != 0)
 			 {
-				 std::string input = this->txtFront->Text;
-				 std::istringstream ss(input);
+				 std::string strFront = msclr::interop::marshal_as< std::string >(this->txtFront->Text);
+				 std::istringstream ss(strFront);
 				 std::string token;
-				 std::string strCombinedString;
-				 
-				 while(std::getline(ss, token, ','))
-					strCombinedString += token;
-				 
 				 int i = 0;
+
+				 while(std::getline(ss, token, ','))
+				 {
+					 if(i < m_iMAXFRONTCHAINRINGS)
+						 strFrontRing[i] += token;
+					i++;
+				 }
 			 }
 		 }
 };
